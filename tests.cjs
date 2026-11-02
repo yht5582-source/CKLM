@@ -93,6 +93,25 @@ QUIZ.forEach((q,i)=>{
 ok(longest<=7,`correct option is the longest in ${longest}/20`);
 eq(QUIZ[0].a,2,'fixed order');
 
+// SHA 2026 Table 2 dyslipidemia thresholds.
+const st=v=>{run({...BASE,...v});return stageText()};
+eq(st({}),'Stage 0','normal lipids');
+eq(st({tg:134}),'Stage 0','TG 134');
+eq(st({tg:135}),'Stage 2','TG 135');
+eq(st({tg:600}),'Stage 2','TG 600 still counted');
+eq(st({tc:310,hdl:80,ldl:100,tg:90}),'Stage 0','TC 310');
+eq(st({tc:311,hdl:80,ldl:100,tg:90}),'Stage 2','TC 311');
+eq(st({ldl:100}),'Stage 0','LDL 100');
+eq(st({tc:180,ldl:101}),'Stage 2','untreated LDL 101');
+eq(st({tc:180,ldl:101,statinTx:'unknown'}),'Stage 2','LDL 101, statin unknown');
+eq(st({tc:180,ldl:101,statinTx:'yes'}),'資料不足','LDL 101 on statin: not counted, and not Stage 0');
+eq(st({tc:180,ldl:90,statinTx:'yes'}),'資料不足','on statin is not Stage 0');
+eq(st({ldl:''}),'資料不足','missing LDL is not Stage 0');
+eq(st({tc:''}),'資料不足','missing TC is not Stage 0');
+eq(st({tc:180,hdl:50,tg:120,ldl:160}),'資料不足','contradictory lipids neither count nor give Stage 0');
+ok(run({...BASE,tg:140}).shaLipid&&!run(BASE).shaLipid,'shaLipid flag');
+eq(st({height:158,weight:60.4,waist:82,sex:'female'}),'Stage 1','adiposity only stays Stage 1');
+
 // Mind map.
 eq(MAP.length,6,'six branches');
 eq(MAP.filter(n=>n.side==='l').length,3,'three left branches');
@@ -100,7 +119,7 @@ MAP.forEach(n=>{ok(n.items.length>=3&&n.step>=0&&n.step<=5,`map ${n.title}`);n.i
 
 // Engine values that the existing page relies on stay as they were.
 eq(results(run(vm.runInContext('demos.a',ctx))).stage,'Stage 3','demo A');
-eq(results(run(vm.runInContext('demos.b',ctx))).stage,'Stage 1','demo B');
+eq(results(run(vm.runInContext('demos.b',ctx))).stage,'Stage 2','demo B: LDL-C 104 counts under SHA');
 eq(results(run(vm.runInContext('demos.c',ctx))).stage,'Stage 4a','demo C');
 
 // Page wiring.
