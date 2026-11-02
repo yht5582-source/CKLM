@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light" />
-<title>CKLM Clinical Navigator 2026 v4.2｜心腎肝代謝整合評估</title>
+<title>CKLM Clinical Navigator 2026 v4.3｜心腎肝代謝整合評估</title>
 <meta name="description" content="CKLM 心腎肝代謝整合評估：PREVENT、KFRE、KDIGO、FIB-4／VCTE／FAST 與 CKLM 0–4 分期之臨床決策輔助工具" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23207d81'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='white'/%3E%3C/svg%3E" />
 <style>
@@ -27,6 +27,79 @@
 .field input.lipid-input-problem{border-color:#c54d45;box-shadow:0 0 0 2px #fbe4e0}
 .lipid-method-note{font-size:11px;color:#6b8087;margin-top:10px;line-height:1.6}
 @media(max-width:560px){.lipid-numbers{grid-template-columns:1fr 1fr}.lipid-stat .value{font-size:18px}}
+
+/* v4.3 teaching views */
+.side{overflow-y:auto}
+@media(max-width:760px){.side{overflow:visible}}
+.nav-teach{display:flex;align-items:center;gap:12px;border:0;color:#b5d0dc;background:transparent;text-align:left;padding:10px 13px;border-radius:12px;width:100%;transition:.15s}
+.nav-teach:hover{background:#1e4357;color:white}
+.nav-teach .num{font-size:12px;width:26px;height:26px;border:1px solid #5a7888;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+body[data-view="cases"] .nav-teach[data-view="cases"],body[data-view="quiz"] .nav-teach[data-view="quiz"],body[data-view="map"] .nav-teach[data-view="map"]{background:#276072;color:white}
+body[data-view="cases"] .nav-teach[data-view="cases"] .num,body[data-view="quiz"] .nav-teach[data-view="quiz"] .num,body[data-view="map"] .nav-teach[data-view="map"] .num{background:#9fe1d2;border-color:#9fe1d2;color:#163b42;font-weight:800}
+body[data-view] .nav-step.active{background:transparent;color:#b5d0dc}
+body[data-view] .nav-step.active .num{background:transparent;border-color:#5a7888;color:inherit;font-weight:400}
+body[data-view] .step-pane,body[data-view] .progress,body[data-view] .actions,body[data-view] .hero,body[data-view] .demo-banner{display:none!important}
+.teach-pane{display:none}
+body[data-view="cases"] #teach-cases,body[data-view="quiz"] #teach-quiz,body[data-view="map"] #teach-map{display:block}
+.demo-banner{margin:0 0 14px;padding:10px 14px;border:1px solid #e7c48e;background:#fff9e9;color:#79551d;border-radius:10px;font-size:13px}
+.t-case{margin-bottom:17px}
+.t-case-head{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:9px}
+.t-case-head h3{margin:0;font-size:17px;font-weight:780;line-height:1.4}
+.t-stem{font-size:14px;margin:0 0 9px}
+.t-ask{font-size:14px;font-weight:700;color:#1d5660;margin:11px 0 0}
+.t-chips{display:flex;flex-wrap:wrap;gap:6px}
+.t-chips span{background:#f2f7f7;border:1px solid #dfe8e9;border-radius:7px;padding:2px 8px;font-size:12px;color:#3e5967}
+.t-visit-label{font-size:12px;font-weight:800;color:#107d7c;margin:13px 0 6px}
+.t-case details{margin-top:14px;border-top:1px solid #e0e9eb;padding-top:12px}
+.t-case summary{cursor:pointer;font-weight:750;color:#087a79;font-size:14px}
+.t-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:7px 0 12px}
+.t-results div{background:#f2f7f7;border-radius:9px;padding:8px 11px;min-width:0}
+.t-results b{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+.t-results span{font-size:15px;font-weight:780;color:var(--navy);overflow-wrap:anywhere}
+.t-case h4{margin:14px 0 4px;font-size:13px;color:#1d5660}
+.t-load{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.t-load small{font-size:11px;color:#7b8d98}
+.t-cite{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.75}
+.t-cite a{margin-right:9px;white-space:nowrap}
+.q-bar{position:sticky;top:0;z-index:5;display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--bg);padding:9px 0;margin-bottom:9px}
+.q-score{font-size:14px;font-weight:750;color:var(--navy)}
+.q-filter{display:flex;gap:6px;flex-wrap:wrap}
+.q-filter button[aria-pressed="true"]{background:#e4f4ef;color:#087e74;border-color:#86cab8}
+.q-card{margin-bottom:13px}
+.q-card[hidden]{display:none}
+.q-stem{font-size:14.5px;margin:7px 0 11px;font-weight:620}
+.q-opts{display:grid;gap:7px}
+.q-opt{display:flex;gap:9px;text-align:left;width:100%;padding:9px 12px;background:#fff;border:1px solid #cbd9dc;border-radius:9px;color:var(--ink);font-size:14px}
+.q-opt:hover:not(:disabled){background:#eef7f6}
+.q-opt:disabled{cursor:default;color:var(--ink)}
+.q-opt b{flex:none;color:#107d7c}
+.q-opt.right{background:#e2f4ed;border-color:#2d9c87}
+.q-opt.wrong{background:#fff0ee;border-color:#c54d45}
+.q-exp{margin-top:11px;padding:11px 13px;background:#f2f7f7;border-left:3px solid #2e9f92;border-radius:0 8px 8px 0;font-size:13.5px}
+.q-exp .verdict{font-weight:800}
+.q-exp .verdict.bad{color:var(--red)}
+.q-exp .verdict.good{color:#0b6e67}
+.q-exp a{display:block;margin-top:6px;font-size:12px}
+.mm{display:grid;grid-template-columns:minmax(0,1fr) 150px minmax(0,1fr);gap:0 26px;align-items:center;position:relative}
+.mm-side{display:grid;gap:12px;min-width:0;position:relative}
+.mm-root{background:linear-gradient(160deg,#16354a,#205e6b);color:white;border-radius:16px;padding:20px 10px;text-align:center;font-weight:800;font-size:17px;line-height:1.4;position:relative;z-index:1}
+.mm-root small{display:block;font-size:11px;font-weight:500;color:#bcd7dd;margin-top:5px}
+.mm-node{background:white;border:1.5px solid #cfe0df;border-radius:13px;box-shadow:var(--shad);min-width:0;position:relative}
+.mm-side.l .mm-node:after,.mm-side.r .mm-node:after{content:"";position:absolute;top:50%;width:26px;border-top:2px solid #9cc7c0}
+.mm-side.l .mm-node:after{right:-27.5px}.mm-side.r .mm-node:after{left:-27.5px}
+.mm-node:before{content:"";position:absolute;top:-14px;bottom:-14px;border-left:2px solid #9cc7c0}
+.mm-node:first-child:before{top:50%}.mm-node:last-child:before{bottom:50%}
+.mm-side.l .mm-node:before{right:-27.5px}.mm-side.r .mm-node:before{left:-27.5px}
+.mm-btn{width:100%;display:flex;justify-content:space-between;gap:9px;align-items:center;border:0;background:none;padding:11px 14px;font-weight:780;font-size:14.5px;color:var(--navy);text-align:left;border-radius:13px}
+.mm-btn:hover{background:#f2f7f7}
+.mm-btn i{font-style:normal;color:var(--muted);flex:none;font-size:12px}
+.mm-node ul{margin:0;padding:0 14px 11px 30px;font-size:13px;display:grid;gap:4px}
+.mm-node li small{color:var(--muted);font-size:11px;margin-left:3px}
+.mm-node[data-open="false"] ul,.mm-node[data-open="false"] .mm-go{display:none}
+.mm-go{display:inline-block;margin:0 14px 11px;font-size:12px;background:none;border:0;padding:0;color:#087a79;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:900px){.mm{grid-template-columns:1fr;gap:12px}.mm-root{order:-1}.mm-node:before,.mm-side.l .mm-node:after,.mm-side.r .mm-node:after{display:none}}
+@media(max-width:760px){.nav-teach{white-space:nowrap;font-size:11px;padding:7px;gap:5px;width:auto}.nav-teach .num{width:20px;height:20px}.teach-nav{display:flex;flex-direction:row;overflow:auto;gap:4px}.q-bar{position:static}}
+@media print{body[data-view] .step-pane,body[data-view] #step-5{display:none!important}.teach-pane .mm-node ul{display:grid!important}.q-bar .btn,.t-load,.mm-go{display:none!important}.t-case,.q-card,.mm-node{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -42,12 +115,15 @@
   <button class="nav-step" data-step="4"><span class="num">05</span> 心血管</button>
   <button class="nav-step" data-step="5"><span class="num">06</span> 整合報告</button>
  </nav>
+ <div class="side-title">教學 / LEARNING</div>
+ <nav class="steps-nav teach-nav" aria-label="教學內容"><button class="nav-teach" data-view="cases"><span class="num">例</span> 示範病例</button><button class="nav-teach" data-view="quiz"><span class="num">題</span> 考題</button><button class="nav-teach" data-view="map"><span class="num">圖</span> 心智圖</button></nav>
  <div class="side-bottom"><strong>依循國際指引</strong><br>AHA/ACC/ADA/ASN 2026<br>SHA CKLM 2026 · KDIGO 2024<br>EASL/EASD/EASO 2024 / 2026<br><br>資料僅在目前瀏覽器頁面處理，不自動上傳或儲存。</div>
 </aside>
 <main class="main"><div class="content">
  <div class="topbar"><div class="eyebrow">EVIDENCE-INFORMED CLINICAL WORKFLOW</div><div class="toolbar"><button class="btn" id="demoMenu">載入示範病例 ▾</button><button class="btn" id="reset">清除資料</button><button class="btn" id="goSources">文獻依據 ↗</button></div></div>
  <header class="hero"><span class="tag">CARDIOVASCULAR · KIDNEY · LIVER · METABOLIC</span><h1>CKLM 心腎肝代謝整合評估</h1><p>一步步完成跨器官風險分層，產生臨床治療方向、追蹤建議與病人衛教摘要。依 SHA CKLM 共識與 AHA、KDIGO、ADA、EASL 正式治療指引設計。</p><div class="hero-grid"><div class="hero-stat"><strong>5 階段</strong><span>CKLM 0–4 共識分期</span></div><div class="hero-stat"><strong>3 軸評估</strong><span>心血管・腎臟・肝纖維化</span></div><div class="hero-stat"><strong>本機運算</strong><span>不需要登入或傳送病歷</span></div></div></header>
  <div class="notice"><strong>臨床使用聲明：</strong>此工具提供教育與決策輔助，不替代醫師判斷。CKLM 0–4 為 SHA 2026 提議的專家分期、尚非經外部驗證的統一診斷或預測模型；PREVENT 10 年 CVD／ASCVD 及 KFRE 2／5 年風險依公開模型自動運算，必須確認適用條件與數值；資料不足時不輸出百分比。PREVENT 採基本模型（不含 HbA1c／UACR／SDI 加強項），其美國族群校準不能直接視為台灣個別病人實際風險。台灣藥證與健保給付應另查。</div>
+ <div class="demo-banner" id="demoBanner" role="status" hidden></div>
  <div class="progress"><div id="progressFill"></div></div>
  <section class="step-pane active" id="step-0"><div class="section-head"><div><span class="stepmark">STEP 01 / 06</span><h2>建立個案基本輪廓</h2><p>不輸入姓名、病歷號或其他識別資訊；本頁不自動儲存。</p></div></div><div class="cards">
   <div class="card"><div class="card-head"><span class="symbol">◎</span><div><h3>人口學資料</h3><p>用於 BMI、FIB-4 及檢查適用性判斷</p></div></div><div class="grid-2"><div class="field"><label for="age">年齡（歲）</label><input id="age" type="number" min="18" max="110" placeholder="例如 58"></div><div class="field"><label for="sex">生理性別</label><select id="sex"><option value="">尚未選擇</option><option value="male">男</option><option value="female">女</option></select></div><div class="field"><label for="height">身高（cm）</label><input id="height" type="number" min="90" max="230" step="0.1" placeholder="例如 165"></div><div class="field"><label for="weight">體重（kg）</label><input id="weight" type="number" min="20" max="300" step="0.1" placeholder="例如 75"></div><div class="field"><label for="waist">腰圍（cm）</label><input id="waist" type="number" min="40" max="200" step="0.1" placeholder="例如 95"></div></div><label class="checkrow"><input type="checkbox" id="asian" checked> 採亞洲族群 BMI／腰圍風險門檻</label><div class="hint">亞洲族群 CKM 過多脂肪組織提示門檻：BMI ≥23；腰圍男 ≥90 cm、女 ≥80 cm。台灣肥胖診斷標準與 CKM 分期門檻不完全相同。</div></div>
@@ -87,6 +163,9 @@
  <div class="result-panel" id="panel-followup"><div class="card"><div class="card-head"><span class="symbol">◷</span><div><h3>追蹤指標與跨科照護</h3><p>個別化時程需考量臨床穩定度與治療變更</p></div></div><div id="followupList" class="risk-list"></div></div></div>
  <div class="result-panel" id="panel-methods"><div class="card"><div class="card-head"><span class="symbol">≡</span><div><h3>分期依據、限制與缺少的資料</h3><p>區分確認疾病、篩檢陽性和未完成評估</p></div></div><div id="methodList" class="risk-list"></div><div class="callout warn">本工具不輸出未經驗證的「CKLM 總風險%」。CKLM Stage 是器官疾病整合描述；CVD 風險、KFRE 與肝纖維化風險是不同的預測終點。</div></div></div>
  </section>
+ <section class="teach-pane" id="teach-cases"><div class="section-head"><div><span class="stepmark">LEARNING · CASES</span><h2>示範病例 6 例</h2><p>全為虛構個案。先自己判讀再展開答案；表格數值由本頁引擎計算，並由 tests.cjs 核對。</p></div></div><div id="caseList"></div></section>
+ <section class="teach-pane" id="teach-quiz"><div class="section-head"><div><span class="stepmark">LEARNING · QUIZ</span><h2>考題 20 題</h2><p>基礎 10 題、高階 10 題，單選。答案不會儲存，重新整理後歸零。</p></div></div><div class="q-bar"><div class="q-score" id="quizScore" aria-live="polite"></div><div class="q-filter" id="quizFilter"><button class="btn small" data-f="all" aria-pressed="true">全部</button><button class="btn small" data-f="basic" aria-pressed="false">基礎</button><button class="btn small" data-f="adv" aria-pressed="false">高階</button><button class="btn small" id="quizReset">重新作答</button></div></div><div id="quizList"></div></section>
+ <section class="teach-pane" id="teach-map"><div class="section-head"><div><span class="stepmark">LEARNING · MIND MAP</span><h2>CKLM 心智圖</h2><p>點標題可收合；「前往工具」跳到對應評估步驟。</p></div><div class="toolbar"><button class="btn small" id="mapToggle">全部收合</button></div></div><div class="mm" id="mindMap"></div></section>
  <div class="actions"><button id="prevBtn" class="btn" style="visibility:hidden">← 上一步</button><button id="nextBtn" class="btn primary">下一步：代謝風險 →</button></div>
  <footer class="footer" id="sources"><strong>主要國際依據（點擊原始來源）</strong><ol class="sources">
  <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13588565/" target="_blank" rel="noopener">Saudi Heart Association 2026 — CKLM Scientific Statement（專家共識，非經驗證風險模型）</a></li>
@@ -103,10 +182,13 @@
  <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11299976/" target="_blank" rel="noopener">EASL 2024 MASLD：VCTE 8／12 kPa 風險區間與分層策略</a></li>
  <li><a href="https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia" target="_blank" rel="noopener">2026 ACC/AHA Dyslipidemia：LDL-C 公式選擇及 TG &ge;400 mg/dL 限制</a></li>
  <li><a href="https://academic.oup.com/jalm/article/9/5/1040/7717178" target="_blank" rel="noopener">ADLM Laboratory Guidance：Sampson/NIH 與 Friedewald LDL-C 公式</a></li>
+ <li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001453" target="_blank" rel="noopener">Ndumele et al., Circulation 2026：CKM 指引全文（教學分頁引用分期與 CKD 風險定義）</a></li>
+ <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12690176/" target="_blank" rel="noopener">ADA Standards of Care 2026 第 11 章：CKD and Risk Management</a></li>
+ <li><a href="https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf" target="_blank" rel="noopener">KDIGO 2024 CKD Guideline 全文 PDF</a></li>
  <li><a href="https://www.nhi.gov.tw/" target="_blank" rel="noopener">台灣中央健康保險署：藥品給付規定需逐項核對</a></li>
- </ol><div class="privacy">研習用途 · 請勿輸入病人身分識別資訊 · 靜態離線可運作 · 版本：2026-10-30 v4.2（Stage 4a／4b 標示 SHA 2026 定義；v4.1：修正 Stage 0 誤判、KDIGO 矩陣標題、新增非糖尿病 CKD 之 SGLT2i 評估）</div></footer>
+ </ol><div class="privacy">研習用途 · 請勿輸入病人身分識別資訊 · 靜態離線可運作 · 版本：2026-11-02 v4.3（新增示範病例 6 例、考題 20 題、心智圖；評估引擎未更動）；v4.2（Stage 4a／4b 標示 SHA 2026 定義；v4.1：修正 Stage 0 誤判、KDIGO 矩陣標題、新增非糖尿病 CKD 之 SGLT2i 評估）</div></footer>
  </div></main></div>
-<dialog id="demoDialog" style="border:0;border-radius:16px;max-width:540px;width:calc(100% - 24px);padding:25px;box-shadow:0 25px 90px #183c5077"><h3 style="margin-top:0">載入教學示範病例</h3><p style="font-size:13px;color:#647b86">以下為虛構個案，不涉及真實病歷；載入會覆蓋目前輸入內容。</p><div style="display:flex;flex-direction:column;gap:9px"><button class="btn" data-demo="a">病例 A｜糖尿病＋CKD G3aA3＋MASLD F2 → Stage 3</button><button class="btn" data-demo="b">病例 B｜腹部肥胖＋糖尿病前期 → Stage 1</button><button class="btn" data-demo="c">病例 C｜心衰竭＋CKD G4 → Stage 4</button></div><div style="text-align:right;margin-top:16px"><button class="btn" id="closeDialog">取消</button></div></dialog>
+<dialog id="demoDialog" style="border:0;border-radius:16px;max-width:540px;width:calc(100% - 24px);padding:25px;box-shadow:0 25px 90px #183c5077"><h3 style="margin-top:0">載入教學示範病例</h3><p style="font-size:13px;color:#647b86">以下為虛構個案，不涉及真實病歷；載入會覆蓋目前輸入內容。</p><div style="display:flex;flex-direction:column;gap:9px"><button class="btn" data-demo="a">病例 A｜糖尿病＋CKD G3aA3＋MASLD F2 → Stage 3</button><button class="btn" data-demo="b">病例 B｜腹部肥胖＋糖尿病前期 → Stage 1</button><button class="btn" data-demo="c">病例 C｜心衰竭＋CKD G4 → Stage 4</button><a class="btn" href="#cases" id="demoToCases">查看另外 6 例教學病例（含判讀解說）→</a></div><div style="text-align:right;margin-top:16px"><button class="btn" id="closeDialog">取消</button></div></dialog>
 <script>
 'use strict';
 const IDs=['age','sex','asian','height','weight','waist','t2d','htn','dyslipid','sbp','dbp','tc','hdl','tg','ldl','ldlMethod','a1c','fpg','egfr','uacr','chronic','otherKidney','kidneyFailure','masld','fibrosis','vcte','cap','vcteIqr','vcteFasting','ast','alt','plt','ascvd','hf','af','subclinical','severeSubclinical','smoker','bpTx','statinTx','emergency','drugRas','drugSglt','drugGlp','drugMra'];
@@ -288,17 +370,176 @@ let methods=[note('','判斷層級',`目前 CKLM：${stageText}。判斷依據�
 currentSummary=`CKLM 整合風險評估（教學/決策輔助）\n暫定分期：${stageText}；${m.stage===null?'資訊不足':stageDesc[m.stage]}\n依據：${m.reasons.join('、')||'待確認'}\nBMI：${fmt(m.body,1)}\n血脂：non-HDL-C ${fmt(m.lipid.nonhdl,1)} mg/dL；Sampson/NIH LDL-C ${fmt(m.lipid.sampson,1)} mg/dL；Friedewald LDL-C ${fmt(m.lipid.fried,1)} mg/dL\n血脂核對：${m.lipid.summary.join('；')||'未發現顯著矛盾'}\nCKD：${m.g||'NA'} / ${m.ac||'NA'}，${m.ckd?'已確認慢性病程':m.maybeCkd?'慢性病程待確認':'未確認'}\nFIB-4：${fmt(m.fib.value,2)}，${m.fib.label}\nVCTE：${m.vcte.lsm!==null?fmt(m.vcte.lsm,1)+" kPa · "+m.vcte.band:"未實測"}；FAST：${has(m.vcte.fast)?fmt(m.vcte.fast,3)+" · "+m.vcte.fastBand:"資料不足"}\nPREVENT-CVD 10年：${has(m.prevent)?fmt(m.prevent,1)+'%':'不適用／缺資料'}；PREVENT-ASCVD 10年：${has(m.ascvdRisk)?fmt(m.ascvdRisk,1)+'%':'不適用／缺資料'}（公開基本模型，非台灣校準）\nKFRE 2年：${has(m.kfre2)?fmt(m.kfre2,2)+'%':'不適用／缺資料'}，5年：${has(m.kfre5)?fmt(m.kfre5,2)+'%':'不適用／缺資料'}（非北美校準四變數）\n待補充：${m.missing.join('、')||'無明顯缺項'}\n\n此報告不含身分資訊；需由醫師確認疾病診斷與治療適用性。`;
 }
 function recalc(){const m=getModel();updateLive(m);renderReport(m)}
-function nav(n){step=Math.max(0,Math.min(5,n));document.querySelectorAll('.nav-step').forEach(x=>{const on=+x.dataset.step===step;x.classList.toggle('active',on);on?x.setAttribute('aria-current','step'):x.removeAttribute('aria-current')});document.querySelectorAll('.step-pane').forEach((x,i)=>x.classList.toggle('active',i===step));el('progressFill').style.width=((step+1)/6*100)+'%';el('prevBtn').style.visibility=step===0?'hidden':'visible';el('nextBtn').textContent=step===5?'返回開始 ↺':`下一步：${['代謝風險','腎臟評估','肝臟評估','心血管','整合報告'][step]} →`;window.scrollTo({top:0,behavior:'instant'});recalc()}
+function nav(n){document.body.removeAttribute('data-view');if(location.hash)history.replaceState(null,'',location.pathname+location.search);step=Math.max(0,Math.min(5,n));document.querySelectorAll('.nav-step').forEach(x=>{const on=+x.dataset.step===step;x.classList.toggle('active',on);on?x.setAttribute('aria-current','step'):x.removeAttribute('aria-current')});document.querySelectorAll('.step-pane').forEach((x,i)=>x.classList.toggle('active',i===step));el('progressFill').style.width=((step+1)/6*100)+'%';el('prevBtn').style.visibility=step===0?'hidden':'visible';el('nextBtn').textContent=step===5?'返回開始 ↺':`下一步：${['代謝風險','腎臟評估','肝臟評估','心血管','整合報告'][step]} →`;window.scrollTo({top:0,behavior:'instant'});recalc()}
 for(const id of IDs){const x=el(id);x.addEventListener(x.type==='checkbox'?'change':x.tagName==='SELECT'?'change':'input',recalc)}
 document.querySelectorAll('.nav-step').forEach(x=>x.addEventListener('click',()=>nav(+x.dataset.step)));
 el('prevBtn').addEventListener('click',()=>nav(step-1));el('nextBtn').addEventListener('click',()=>nav(step===5?0:step+1));
 document.querySelectorAll('.result-tab').forEach(x=>x.addEventListener('click',()=>{document.querySelectorAll('.result-tab').forEach(y=>y.classList.toggle('active',x===y));document.querySelectorAll('.result-panel').forEach(y=>y.classList.toggle('active',y.id==='panel-'+x.dataset.panel))}));
-el('reset').addEventListener('click',()=>{if(!confirm('確定清除所有目前輸入資料？'))return;for(const id of IDs){const e=el(id);if(e.type==='checkbox')e.checked=(id==='asian');else if(e.tagName==='SELECT')e.selectedIndex=0;else e.value=''}nav(0)});
+el('reset').addEventListener('click',()=>{if(!confirm('確定清除所有目前輸入資料？'))return;for(const id of IDs){const e=el(id);if(e.type==='checkbox')e.checked=(id==='asian');else if(e.tagName==='SELECT')e.selectedIndex=0;else e.value=''}el('demoBanner').hidden=true;nav(0)});
 el('preventMissing').addEventListener('click',(ev)=>{const btn=ev.target.closest('[data-target]');if(!btn)return;const id=btn.dataset.target;const tab=({age:0,sex:0,t2d:0,sbp:1,tc:1,hdl:1,egfr:2,kidneyFailure:2,ascvd:4,hf:4,subclinical:4,severeSubclinical:4,smoker:4,bpTx:4,statinTx:4})[id];if(tab===undefined)return;nav(tab);const field=el(id);field.scrollIntoView({behavior:'smooth',block:'center'});field.focus({preventScroll:true});field.classList.add('input-target');setTimeout(()=>field.classList.remove('input-target'),1900)});el('goSources').addEventListener('click',()=>el('sources').scrollIntoView({behavior:'smooth'}));el('printResult').addEventListener('click',()=>window.print());el('copyResult').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(currentSummary);el('copyResult').textContent='已複製 ✓';setTimeout(()=>el('copyResult').textContent='複製摘要',1800)}catch(e){const t=document.createElement('textarea');t.value=currentSummary;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();el('copyResult').textContent='已複製 ✓';setTimeout(()=>el('copyResult').textContent='複製摘要',1800)}});
 el('demoMenu').addEventListener('click',()=>el('demoDialog').showModal());el('closeDialog').addEventListener('click',()=>el('demoDialog').close());el('demoDialog').addEventListener('click',ev=>{if(ev.target===el('demoDialog'))el('demoDialog').close()});
 const demos={a:{age:54,sex:'male',height:170,weight:86,waist:101,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:142,dbp:88,tg:219,ldl:105,a1c:8.1,fpg:165,egfr:48,uacr:640,chronic:'yes',otherKidney:'yes',kidneyFailure:'no',masld:'yes',fibrosis:'F2',vcte:10.1,cap:310,vcteIqr:14,vcteFasting:"yes",ast:62,alt:71,plt:188,ascvd:'no',hf:'no',af:'no',subclinical:'no',tc:207,hdl:42,smoker:'no',bpTx:'yes',statinTx:'no',drugRas:true},b:{age:42,sex:'female',height:158,weight:64,waist:84,t2d:'no',htn:'no',dyslipid:'no',sbp:118,dbp:74,tg:101,ldl:104,a1c:5.9,fpg:108,egfr:103,uacr:12,chronic:'no',otherKidney:'no',kidneyFailure:'no',masld:'no',fibrosis:'unknown',ast:20,alt:22,plt:264,ascvd:'no',hf:'no',af:'no',subclinical:'no',tc:182,hdl:52,smoker:'no',bpTx:'no',statinTx:'no'},c:{age:67,sex:'male',height:165,weight:72,waist:95,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:132,dbp:76,tg:157,ldl:81,a1c:7.1,egfr:24,uacr:800,chronic:'yes',otherKidney:'yes',kidneyFailure:'no',masld:'yes',fibrosis:'F1',ast:34,alt:36,plt:193,ascvd:'yes',hf:'yes',af:'no',subclinical:'yes',tc:165,hdl:48,smoker:'no',bpTx:'yes',statinTx:'yes',drugRas:true,drugSglt:true}};
-document.querySelectorAll('[data-demo]').forEach(x=>x.addEventListener('click',()=>{const d=demos[x.dataset.demo];for(const id of IDs){const e=el(id);if(e.type==='checkbox')e.checked=id==='asian';else if(e.tagName==='SELECT')e.selectedIndex=0;else e.value=''}for(const [id,value]of Object.entries(d)){const e=el(id);if(e.type==='checkbox')e.checked=value;else e.value=value}el('demoDialog').close();nav(5)}));
+function loadValues(d,label){for(const id of IDs){const e=el(id);if(e.type==='checkbox')e.checked=id==='asian';else if(e.tagName==='SELECT')e.selectedIndex=0;else e.value=''}for(const [id,value]of Object.entries(d)){const e=el(id);if(e.type==='checkbox')e.checked=value;else e.value=value}const b=el('demoBanner');b.textContent='目前顯示虛構示範病例：'+label+'。修改任一欄位後此標示會消失。';b.hidden=false}
+document.querySelectorAll('[data-demo]').forEach(x=>x.addEventListener('click',()=>{loadValues(demos[x.dataset.demo],x.textContent);el('demoDialog').close();nav(5)}));
 recalc();
+</script>
+<script>
+'use strict';
+/*TEACH-START*/
+const SRC={
+ sha:['SHA 2026 CKLM','https://pmc.ncbi.nlm.nih.gov/articles/PMC13588565/'],
+ aha:['AHA/ACC/ADA/ASN 2026 CKM','https://www.ahajournals.org/doi/10.1161/CIR.0000000000001453'],
+ prevent:['AHA PREVENT 適用條件','https://professional.heart.org/en/guidelines-and-statements/prevent-calculator'],
+ lipid:['ACC/AHA 2026 血脂指引重點','https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia/top-things-to-know'],
+ kdigo:['KDIGO 2024 CKD','https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf'],
+ ada:['ADA 2026 第 11 章','https://pmc.ncbi.nlm.nih.gov/articles/PMC12690176/'],
+ easl24:['EASL/EASD/EASO 2024 MASLD','https://pmc.ncbi.nlm.nih.gov/articles/PMC11299976/'],
+ easl26:['EASL/EASD/EASO 2026 MASH 用藥','https://www.journal-of-hepatology.eu/article/S0168-8278%2826%2902877-1/fulltext'],
+ fast:['Newsome 2020 FAST','https://pmc.ncbi.nlm.nih.gov/articles/PMC7066580/'],
+ adlm:['ADLM 血脂檢驗指引','https://academic.oup.com/jalm/article/9/5/1040/7717178']
+};
+const NEG={ascvd:'no',hf:'no',af:'no',subclinical:'no',severeSubclinical:'no',kidneyFailure:'no',smoker:'no'};
+const CASES=[
+{id:'c1',title:'FIB-4 和 VCTE 都偏高，可以直接寫 F2 嗎？',tag:'肝纖維化分層',
+ stem:'61 歲女性，第二型糖尿病 8 年，高血壓與血脂異常都在治療中。腹部超音波見脂肪肝，無過量飲酒，B、C 肝篩檢陰性，因此已診斷 MASLD。未做肝切片。',
+ chips:['BMI 29.2','腰圍 94 cm','BP 128/76','HbA1c 7.2%','eGFR 82','UACR 18','AST 48','ALT 46','PLT 172','VCTE 10.4 kPa','CAP 318','IQR/M 16%'],
+ ask:'她目前應分在哪一期？病歷可以記錄「F2」嗎？',
+ visits:[{label:'本次門診',load:'帶入工具',
+  values:{...NEG,age:61,sex:'female',height:156,weight:71,waist:94,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:128,dbp:76,tc:176,hdl:46,tg:168,ldl:96,ldlMethod:'calculated',a1c:7.2,fpg:138,egfr:82,uacr:18,chronic:'no',otherKidney:'no',masld:'yes',fibrosis:'unknown',ast:48,alt:46,plt:172,vcte:10.4,cap:318,vcteIqr:16,vcteFasting:'yes',bpTx:'yes',statinTx:'yes'},
+  expect:{stage:'Stage 2',kdigo:'G2 · A1',fib:'2.51',lsm:'中間區間',fast:'0.597',cvd:'12.8%',asc:'7.5%'}}],
+ why:['FIB-4 = 61 × 48 ÷（172 × √46）= 2.51，落在 1.3–2.67。EASL 指出這一區間可直接做彈性檢測，或先強化管理 1 年再測；數值接近 2.67 或屬高風險者，建議直接做彈性檢測。',
+  'VCTE 10.4 kPa 介於 F3 的排除值 8 與納入值 12 之間，FAST 0.597 也落在 0.35–0.67 的灰色區。三項都是風險分層，都不是 F 分期。',
+  '工具只把<b>已確認</b>的 F2–F3 算進 Stage 3，所以目前是 Stage 2，意思是「最低已符合階段」。肝臟專科確認 F2–F3 後會升為 Stage 3（把工具的纖維化欄改成 F2 就看得到）。'],
+ next:['轉肝臟專科，視情況加做 ELF、MRE 或切片。','確認為非肝硬化 MASH F2–F3 後，可在生活型態介入之外考慮 resmetirom 或 semaglutide 2.4 mg／週；須另查台灣藥證與健保給付。','Stage 2 不代表放心：糖尿病、血壓、血脂的治療照常強化。'],
+ trap:'把「FIB-4 陽性」或「VCTE ≥8」直接寫成 F2／F3。',
+ cite:['easl24','easl26','fast','sha']},
+{id:'c2',title:'沒有任何器官病變，為什麼是 Stage 3？',tag:'PREVENT 風險等值',
+ stem:'72 歲男性，第二型糖尿病與高血壓，仍每天抽菸，未用 statin。沒有胸痛或喘，從未診斷心血管疾病。腎功能與尿蛋白正常，沒有脂肪肝。',
+ chips:['BMI 26.9','腰圍 96 cm','BP 152/82（已用降壓藥）','TC 212','HDL 38','HbA1c 7.6%','eGFR 64','UACR 22','AST 24','ALT 22','PLT 228'],
+ ask:'為何他會落在 Stage 3？這個結果對治療有什麼意義？',
+ visits:[{label:'本次門診',load:'帶入工具',
+  values:{...NEG,age:72,sex:'male',height:168,weight:76,waist:96,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:152,dbp:82,tc:212,hdl:38,tg:176,ldl:134,ldlMethod:'calculated',a1c:7.6,fpg:146,egfr:64,uacr:22,chronic:'no',otherKidney:'no',masld:'no',fibrosis:'unknown',ast:24,alt:22,plt:228,smoker:'yes',bpTx:'yes',statinTx:'no'},
+  expect:{stage:'Stage 3',kdigo:'G2 · A1',fib:'1.62',cvd:'36.3%',asc:'24.8%'}}],
+ why:['AHA 2026 把 10 年 PREVENT-CVD ≥20% 列為 Stage 3 條件之一；SHA 則寫「高預測 10 年 CVD 風險」，沒有給數字。工具採用 20%。','這是<b>風險等值</b>，不表示他已有亞臨床病變。PREVENT 以美國人口校準，36.3% 不能當成他個人的準確機率。','FIB-4 1.62：他超過 65 歲，下限改用 2.0，屬較低風險；若是 60 歲，同樣數值就屬中間風險。'],
+ next:['戒菸優先，其次把血壓控制下來。','ACC/AHA 2026：40–75 歲糖尿病者，不論 LDL-C 都建議降 LDL 治療。','AHA 2026：PREVENT-CVD ≥7.5% 可作為有適應症時啟用 SGLT2i 或 GLP-1 類藥物的依據。','可討論 CAC 或心臟生物標記，但不要因此延後治療。'],
+ trap:'看到器官檢查正常就以為分期偏低，或把 PREVENT 的百分比當成 CKLM 總風險。',
+ cite:['aha','sha','lipid','easl24']},
+{id:'c3',title:'一次 UACR 520：先確認，再分期',tag:'CKD 慢性病程',
+ stem:'49 歲女性，健檢發現 eGFR 52、UACR 520，無糖尿病，過去沒有腎臟報告可比對。3 個月後複驗仍異常，且診間與居家血壓都偏高，診斷高血壓。',
+ chips:['BMI 26.6','腰圍 86 cm','BP 136/84 → 138/86','HbA1c 5.5%','eGFR 52 → 50','UACR 520 → 610','FIB-4 正常'],
+ ask:'兩次門診各分在哪一期？KDIGO 落在紅區，但 KFRE 很低，該怎麼解讀？',
+ visits:[{label:'第 1 次：單次檢驗',load:'帶入第 1 次',
+  values:{...NEG,age:49,sex:'female',height:160,weight:68,waist:86,t2d:'no',htn:'no',dyslipid:'no',sbp:136,dbp:84,tc:172,hdl:54,tg:112,ldl:98,ldlMethod:'calculated',a1c:5.5,fpg:92,egfr:52,uacr:520,chronic:'unknown',otherKidney:'unknown',masld:'no',fibrosis:'unknown',ast:21,alt:19,plt:255,bpTx:'no',statinTx:'no'},
+  expect:{stage:'Stage 2',kdigo:'G3a · A3',fib:'0.93',cvd:'3.6%',asc:'2.1%',k2:'—',k5:'—'}},
+ {label:'第 2 次：3 個月後已確認',load:'帶入第 2 次',
+  values:{...NEG,age:49,sex:'female',height:160,weight:68,waist:86,t2d:'no',htn:'yes',dyslipid:'no',sbp:138,dbp:86,tc:174,hdl:53,tg:118,ldl:98,ldlMethod:'calculated',a1c:5.5,fpg:93,egfr:50,uacr:610,chronic:'yes',otherKidney:'no',masld:'no',fibrosis:'unknown',ast:22,alt:20,plt:250,bpTx:'no',statinTx:'no'},
+  expect:{stage:'Stage 3',kdigo:'G3a · A3',fib:'0.96',cvd:'4.2%',asc:'2.4%',k2:'0.3%',k5:'1.3%'}}],
+ why:['CKD 要持續 ≥3 個月（或有其他腎損傷證據）。第 1 次只因血壓算 Stage 2，並提示「慢性病程待確認」；KFRE 也不計算，因為它只適用已確認的 CKD G3–G5。','確認後 G3a A3 為 KDIGO 極高風險，升為 Stage 3。','KDIGO 矩陣是整體風險分層，KFRE 是腎衰竭的絕對風險。5 年 1.3% 低於 3–5%，只表示 KFRE 這一項沒有達到轉診門檻。'],
+ next:['KDIGO 把 ACR ≥300 mg/g 另列為腎臟科轉診條件，所以仍要轉診，並查明病因（尿沉渣、影像、視情況切片）。','無糖尿病、A3：建議 RASi（1B）；eGFR ≥20 且 ACR ≥200：建議 SGLT2i（1A）。','KDIGO 建議可耐受時 SBP <120 mmHg（2B，標準化診間測量）。'],
+ trap:'用單次結果確診 CKD；或因 KFRE 低就不轉診。',
+ cite:['kdigo','sha']},
+{id:'c4',title:'eGFR 還沒到 15，何時開始準備腎臟替代治療？',tag:'KFRE 與用藥時機',
+ stem:'45 歲男性，第二型糖尿病腎病變，已用最大耐受劑量 ACE 抑制劑，無心血管疾病。第 1 次門診尚未用 SGLT2 抑制劑，當天開始。18 個月後腎功能仍持續下降，SGLT2 抑制劑耐受良好。',
+ chips:['BMI 28.4','HbA1c 7.4%','eGFR 27 → 16','UACR 2400 → 5200','K⁺ 正常','未透析'],
+ ask:'兩次的 KFRE 各代表要做什麼？eGFR 掉到 16 時，SGLT2 抑制劑要停嗎？',
+ visits:[{label:'第 1 次',load:'帶入第 1 次',
+  values:{...NEG,age:45,sex:'male',height:172,weight:84,waist:100,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:134,dbp:78,tc:160,hdl:42,tg:150,ldl:84,ldlMethod:'calculated',a1c:7.4,fpg:140,egfr:27,uacr:2400,chronic:'yes',otherKidney:'yes',masld:'no',fibrosis:'unknown',ast:20,alt:18,plt:210,bpTx:'yes',statinTx:'yes',drugRas:true},
+  expect:{stage:'Stage 3',kdigo:'G4 · A3',cvd:'25.8%',asc:'11.7%',k2:'10.6%',k5:'35.2%'}},
+ {label:'第 2 次：18 個月後',load:'帶入第 2 次',
+  values:{...NEG,age:46,sex:'male',height:172,weight:84,waist:100,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:132,dbp:76,tc:158,hdl:42,tg:150,ldl:82,ldlMethod:'calculated',a1c:7.3,fpg:136,egfr:16,uacr:5200,chronic:'yes',otherKidney:'yes',masld:'no',fibrosis:'unknown',ast:20,alt:18,plt:205,bpTx:'yes',statinTx:'yes',drugRas:true,drugSglt:true},
+  expect:{stage:'Stage 3',kdigo:'G4 · A3',cvd:'35.6%',asc:'15.5%',k2:'41.1%',k5:'87.1%'}}],
+ why:['KDIGO 的三個門檻：5 年 3–5% 考慮轉診；2 年 >10% 安排多專業照護；2 年 >40% 進行透析模式衛教、血管通路規劃與移植轉介。','這位病人第 1 次 2 年風險 10.6%，已達多專業照護門檻；第 2 次 41.1%，已達準備腎臟替代治療的門檻。','第 2 次 eGFR 16 仍未符合工具的腎衰竭條件，所以仍是 Stage 3，不是 4b；AHA 2026 的腎衰竭定義是 eGFR <15 或需要長期腎臟替代治療。','SGLT2i 建議在 eGFR ≥20 時開始。已在使用者，eGFR 降到 20 以下仍可續用，直到不耐受或開始腎臟替代治療。'],
+ next:['第 1 次：加上 SGLT2i。finerenone 依 KDIGO 需 eGFR >25、血鉀正常，且在最大耐受 RASi 下仍有白蛋白尿。','工具的「SGLT2i + finerenone 同時啟用」提示只在 eGFR 30–90 出現，因為 CONFIDENCE 試驗收案範圍如此；eGFR 27 不適用同時啟用的證據。','第 2 次：啟動腎臟替代治療準備，不用等 eGFR 跌破 15。'],
+ trap:'等 eGFR <15 才開始準備；或一看到 eGFR <20 就停掉 SGLT2i。',
+ cite:['kdigo','ada','aha']},
+{id:'c5',title:'肝硬化但沒有心血管疾病，為什麼是 Stage 4b？',tag:'SHA 與 AHA 的差異',
+ stem:'67 歲女性，第二型糖尿病、高血壓。肝臟專科確認 MASLD 代償性肝硬化（F4，Child-Pugh A），沒有失代償病史，也沒有心血管疾病。她問能否使用新的 MASH 藥物，也擔心肝硬化不能吃 statin。',
+ chips:['BMI 27.5','BP 126/70','HbA1c 6.9%','eGFR 74','UACR 24','AST 58','ALT 42','PLT 96','VCTE 24.6 kPa','CAP 296','未用 statin'],
+ ask:'為什麼是 4b？MASH 標靶藥與 statin 該怎麼回答她？',
+ visits:[{label:'本次門診',load:'帶入工具',
+  values:{...NEG,age:67,sex:'female',height:155,weight:66,waist:90,t2d:'yes',htn:'yes',dyslipid:'yes',sbp:126,dbp:70,tc:158,hdl:44,tg:120,ldl:88,ldlMethod:'calculated',a1c:6.9,fpg:128,egfr:74,uacr:24,chronic:'no',otherKidney:'no',masld:'yes',fibrosis:'F4',ast:58,alt:42,plt:96,vcte:24.6,cap:296,vcteIqr:18,vcteFasting:'yes',bpTx:'yes',statinTx:'no'},
+  expect:{stage:'Stage 4b',kdigo:'G2 · A1',fib:'6.25',lsm:'進展期風險高',fast:'0.798',cvd:'20.1%',asc:'10.4%'}}],
+ why:['SHA 2026：Stage 4 包含 MASLD 肝硬化，4b 是「有腎衰竭或肝硬化」。','AHA 2026 的 CKM 分期定義未納入肝硬化，4b 僅指腎衰竭。向其他科說明時要講清楚用的是哪一套。','沒有已知 CVD，PREVENT 仍可計算；但它預測的是心血管事件，與肝臟預後無關。'],
+ next:['EASL 2026：MASH 肝硬化目前不應以 resmetirom 或 semaglutide 作為 MASH 標靶治療。','GLP-1 RA 在代償性肝硬化可依糖尿病或肥胖適應症使用（EASL 2024）。','Statin 可用於代償性肝硬化，依心血管風險決定（EASL 2024，LoE 1）。','肝癌監測：EASL 建議每半年腹部超音波；同時由肝臟專科評估靜脈曲張。'],
+ trap:'把 F2–F3 的 MASH 用藥建議套到肝硬化；或因為肝硬化就不給 statin。',
+ cite:['sha','aha','easl24','easl26']},
+{id:'c6',title:'新診斷心房顫動，加上 TG 460',tag:'Stage 4a 與血脂公式',
+ stem:'59 歲男性，高血壓、腹部肥胖。因心悸就診，心電圖確診心房顫動。血脂報告 TC 238、HDL 34、TG 460，LDL-C 148，報告未註明是計算或直接測定，也不確定是否空腹。',
+ chips:['BMI 30.4','腰圍 104 cm','BP 138/88','HbA1c 6.0%','FPG 112','eGFR 72','UACR 20','AST 30','ALT 36','PLT 220'],
+ ask:'分期是什麼？PREVENT 為何算不出來？這個 LDL-C 能相信嗎？',
+ visits:[{label:'本次門診',load:'帶入工具',
+  values:{...NEG,af:'yes',age:59,sex:'male',height:174,weight:92,waist:104,t2d:'no',htn:'yes',dyslipid:'yes',sbp:138,dbp:88,tc:238,hdl:34,tg:460,ldl:148,ldlMethod:'unknown',a1c:6.0,fpg:112,egfr:72,uacr:20,chronic:'no',otherKidney:'no',masld:'no',fibrosis:'unknown',ast:30,alt:36,plt:220,bpTx:'yes',statinTx:'no'},
+  expect:{stage:'Stage 4a',kdigo:'G2 · A1',fib:'1.34',cvd:'—',asc:'—',ldl:'Sampson 122.2；Friedewald —；non-HDL 204.0'}}],
+ why:['SHA 與 AHA 2026 都把心房顫動列入 Stage 4 的臨床 CVD；沒有腎衰竭或肝硬化，所以是 4a。','PREVENT 只用於沒有已知 CVD 的人，工具也把 AF 設為不適用，因此不顯示百分比。','TG ≥400 時 Friedewald 不可用，工具顯示「—」；Sampson 估 122，與報告的 148 差 26，雖未達工具的警示門檻，來源仍不明。Non-HDL-C 204 不受這個問題影響。'],
+ next:['查明 LDL-C 的測定方式，必要時空腹複驗或直接測定。TG >200 時 ApoB 有助評估。','持續高 TG 時，statin 仍是藥物治療的基礎；預防胰臟炎可能需加上降 TG 藥物，尤其 TG ≥1000。','依 AF 指引評估中風風險與抗凝，並找出可逆因素。','FIB-4 1.34 落在中間風險，又有多項代謝危險因子，別漏掉肝臟評估。'],
+ trap:'把高 TG 下的 LDL-C 當精確值；或對已有 AF 的病人繼續用 PREVENT 做初級預防討論。',
+ cite:['sha','aha','prevent','lipid','adlm']}
+];
+const BASE={...NEG,age:52,sex:'male',height:175,weight:67,waist:80,t2d:'no',htn:'no',dyslipid:'no',sbp:118,dbp:74,tc:170,hdl:55,tg:90,ldl:90,ldlMethod:'calculated',a1c:5.2,fpg:88,egfr:95,uacr:10,chronic:'no',otherKidney:'no',masld:'no',fibrosis:'unknown',ast:20,alt:20,plt:250,bpTx:'no',statinTx:'no'};
+const QUIZ=[
+{lv:'basic',q:'52 歲男性，BMI 21.9、腰圍 80 cm，血壓 136/84 mmHg；血糖、血脂、腎、肝都正常，無 CVD。工具的暫定分期是？',o:['Stage 0','Stage 1','Stage 2','Stage 3'],a:2,e:'SBP ≥130 或 DBP ≥80 即屬高血壓這項代謝危險因子，歸 Stage 2。正式診斷仍須重複測量確認。',s:'SHA 2026 Table 1–2',l:'sha',check:{v:{sbp:136,dbp:84},stage:'Stage 2'}},
+{lv:'basic',q:'60 歲，AST 40、ALT 25、PLT 200。FIB-4 是多少？',o:['0.96','2.40','1.20','4.80'],a:1,e:'FIB-4 = 年齡 × AST ÷（PLT × √ALT）= 60 × 40 ÷（200 × 5）= 2.40。',s:'EASL 2024',l:'easl24',check:{v:{age:60,ast:40,alt:25,plt:200},fib:'2.40'}},
+{lv:'basic',q:'CKD 已確認，eGFR 38、UACR 120 mg/g。KDIGO 風險屬於哪一級？',o:['低','中','高','極高'],a:3,e:'G3b A2 在 KDIGO 矩陣是紅區（極高風險）。G3b A1 才是橘區（高風險）。',s:'KDIGO 2024',l:'kdigo',check:{v:{egfr:38,uacr:120,chronic:'yes'},kdigo:'G3b · A2',r:3}},
+{lv:'basic',q:'健檢單次 eGFR 52，過去沒有資料。下列何者正確？',o:['異常需持續 ≥3 個月才可確診 CKD','單次 eGFR <60 即可確診 CKD','一定要腎切片才能確診','UACR ≥300 才算 CKD'],a:0,e:'CKD 需 eGFR <60 或 UACR ≥30 持續 ≥3 個月，或有其他腎損傷證據。',s:'SHA 2026 Table 2',l:'sha',check:{v:{egfr:52},maybeCkd:true}},
+{lv:'basic',q:'MASLD 病人 VCTE 9.5 kPa，品質良好。依 EASL 2024 應如何解讀？',o:['已排除進展期纖維化','確診 F3','中間區間，需進一步評估','確診肝硬化'],a:2,e:'F3 的排除值 8 kPa、納入值 12 kPa，9.5 落在兩者之間，不能直接對應 F 分期。',s:'EASL 2024',l:'easl24',check:{v:{vcte:9.5,vcteIqr:15,vcteFasting:'yes'},lsm:'中間區間'}},
+{lv:'basic',q:'PREVENT 方程式適用哪一群人？',o:['18–79 歲、無糖尿病','30–79 歲、含已有冠心病者','40–75 歲、LDL-C ≥70','30–79 歲、無已知 CVD'],a:3,e:'AHA 官方說明：用於 30–79 歲、無已知 CVD 的成人。',s:'AHA PREVENT 適用條件',l:'prevent'},
+{lv:'basic',q:'本工具的 4 變數 KFRE 使用哪四項？',o:['年齡、eGFR、血壓、BMI','年齡、性別、eGFR、UACR','eGFR、UACR、血鉀、HbA1c','性別、eGFR、血壓、血鉀'],a:1,e:'4 變數 KFRE 使用年齡、性別、eGFR、UACR，適用於已確認的 CKD G3–G5。',s:'KDIGO 2024 Rec 2.2.1',l:'kdigo'},
+{lv:'basic',q:'TG 450 mg/dL 時，下列關於 LDL-C 計算何者正確？',o:['Friedewald 不可用','Friedewald 改除以 10 即可','LDL-C 一律視為 0','把 non-HDL-C 填入 LDL-C 欄'],a:0,e:'TG ≥400 時 Friedewald 不適用，工具不顯示其結果；應核對空腹狀態與檢驗室的方法。',s:'ADLM 血脂檢驗指引',l:'adlm',check:{v:{tg:450},friedNull:true}},
+{lv:'basic',q:'46 歲女性，BMI 24.2、腰圍 82 cm，血壓、血糖、血脂、腎、肝都正常。勾選亞洲門檻時的分期是？',o:['Stage 0','Stage 2','Stage 1','資料不足，無法分期'],a:2,e:'亞洲門檻為 BMI ≥23、腰圍女 ≥80 cm，因此符合 Stage 1。取消亞洲門檻，同一人會變成 Stage 0。',s:'AHA 2026 分期表',l:'aha',check:{v:{age:46,sex:'female',height:158,weight:60.4,waist:82},stage:'Stage 1',alt:{v:{asian:false},stage:'Stage 0'}}},
+{lv:'basic',q:'新診斷心房顫動，eGFR 70，沒有肝硬化。依 SHA 2026 屬於？',o:['Stage 3','Stage 4a','Stage 4b','Stage 2'],a:1,e:'AF 屬臨床 CVD，歸 Stage 4；沒有腎衰竭或肝硬化，所以是 4a。',s:'SHA 2026 Table 1',l:'sha',check:{v:{af:'yes',egfr:70},stage:'Stage 4a'}},
+{lv:'adv',q:'T2D、已確認 MASLD，FIB-4 3.1、VCTE 11 kPa，尚未由專科確認纖維化階段。工具如何分期，為什麼？',o:['Stage 3，FIB-4 >2.67 等於 F3','Stage 4，VCTE 已高','Stage 3，視同 PREVENT ≥20%','暫定 Stage 2，待確認 F 分期'],a:3,e:'FIB-4 與 VCTE 都不能單獨確診 F2／F3。工具顯示最低已符合階段，專科確認 F2–F3 後才升 Stage 3。',s:'SHA 2026 Table 1、EASL 2024',l:'easl24',check:{v:{t2d:'yes',masld:'yes',age:60,ast:62,alt:40,plt:190,vcte:11},stage:'Stage 2',alt:{v:{fibrosis:'F3'},stage:'Stage 3'}}},
+{lv:'adv',q:'無症狀，CAC 350，無臨床 CVD。對 PREVENT 與分期的影響是？',o:['PREVENT 不適用；Stage 3','PREVENT 照算；Stage 2','PREVENT 不適用；Stage 4a','兩者都不受 CAC 影響'],a:0,e:'AHA 明列 CAC ≥300 或 LVEF <40% 這類重度亞臨床 CVD 不用 PREVENT。亞臨床 ASCVD 屬 Stage 3，臨床事件才是 Stage 4。',s:'AHA PREVENT 適用條件',l:'prevent',check:{v:{subclinical:'yes',severeSubclinical:'yes'},stage:'Stage 3',cvdNull:true}},
+{lv:'adv',q:'無糖尿病、無心衰竭的 CKD，eGFR 38、UACR 90 mg/g。KDIGO 2024 對 SGLT2i 的建議強度是？',o:['1A','不建議使用','2B','僅限合併心衰竭'],a:2,e:'eGFR 20–45 且 ACR <200 為 2B。eGFR ≥20 且 ACR ≥200，或合併心衰竭，才是 1A。',s:'KDIGO 2024 Rec 3.7.2–3.7.3',l:'kdigo'},
+{lv:'adv',q:'T2D 合併 CKD，已穩定使用 SGLT2i，eGFR 降到 18，未透析，耐受良好。應如何處理？',o:['立即停藥','可繼續，至不耐受或開始 KRT','劑量減半','改用 finerenone 取代'],a:1,e:'SGLT2i 在 eGFR ≥20 時開始；已使用者低於 20 仍可續用，直到不耐受或開始腎臟替代治療。',s:'KDIGO 2024 PP 3.7.1',l:'kdigo'},
+{lv:'adv',q:'CKD G4，KFRE 2 年 14%、5 年 33%。依 KDIGO 這個數字主要支持什麼？',o:['不需要轉診','立即建立血管通路','已符合腎衰竭定義','安排多專業照護'],a:3,e:'2 年 >10% 用於決定多專業照護時機；2 年 >40% 才是透析模式衛教與血管通路規劃的門檻。5 年 3–5% 則是考慮轉診。',s:'KDIGO 2024 PP 2.2.1–2.2.3',l:'kdigo'},
+{lv:'adv',q:'T2D，eGFR 42、UACR 180，已用最大耐受 RASi，血鉀 5.6 mmol/L。可否開始 finerenone？',o:['先處理高血鉀，正常後再評估','可直接開始','併用 spironolactone 較好','停 RASi 改用 finerenone'],a:0,e:'KDIGO 建議的條件之一是血鉀正常。RASi 相關高血鉀多可先用降鉀措施處理，不必優先停 RASi。',s:'KDIGO 2024 Rec 3.8.1、PP 3.6.3',l:'kdigo'},
+{lv:'adv',q:'T2D、MASH 代償性肝硬化（F4），有心血管風險。下列何者符合 EASL？',o:['Resmetirom 作 MASH 治療','Semaglutide 2.4 mg 作 MASH 治療','不用 MASH 標靶藥；statin 可用','肝硬化一律禁用 statin'],a:2,e:'EASL 2026：MASH 肝硬化不應以 resmetirom 或 semaglutide 作為 MASH 標靶治療。EASL 2024：代償性肝硬化可依 CV 風險使用 statin，GLP-1 RA 可依糖尿病或肥胖適應症使用。',s:'EASL 2026、EASL 2024',l:'easl26'},
+{lv:'adv',q:'CKD 已確認，G2 A3（eGFR 75、UACR 420），無其他器官病變，但有高血壓與腹部肥胖。SHA 與 AHA 的分期是？',o:['都是 Stage 2','都是 Stage 3','SHA 2；AHA 3','SHA 3；AHA 2'],a:3,e:'SHA 把 KDIGO 高風險與極高風險都放 Stage 3，本工具依此。AHA 把 G1–G2 A3 歸 moderate-high（Stage 2），very high 才列 Stage 3 條件。',s:'SHA 2026 Table 1、AHA 2026 分期表',l:'aha',check:{v:{htn:'yes',sbp:138,dbp:86,height:170,weight:80,waist:96,egfr:75,uacr:420,chronic:'yes'},stage:'Stage 3',r:2}},
+{lv:'adv',q:'報告 TC 180、HDL 50、TG 120、LDL-C 160 mg/dL。最優先的處理是？',o:['診斷家族性高膽固醇血症','核對數據，LDL-C 高於 non-HDL-C','改用 Friedewald 重算就好','開始降 TG 藥物'],a:1,e:'Non-HDL-C 只有 130，LDL-C 160 不合理；工具標示為明顯矛盾。先查打錯、單位或不同日期的報告，不要修改正式報告。',s:'本工具血脂檢查；ADLM 血脂檢驗指引',l:'adlm',check:{v:{tc:180,hdl:50,tg:120,ldl:160},lipid:'urgent'}},
+{lv:'adv',q:'50 歲 T2D，無 CVD 與 CKD，PREVENT-ASCVD 2.5%、LDL-C 95 mg/dL。降 LDL 治療的建議是？',o:['仍建議，40–75 歲糖尿病不看 LDL','<3% 所以不需治療','等 CAC ≥300 再治療','先觀察 10 年'],a:0,e:'ACC/AHA 2026：40–75 歲有糖尿病或 CKD 3–4 期者，不論 LDL-C 都建議降 LDL 治療。PREVENT 的 3／5／10% 分層主要用於其他初級預防族群。',s:'ACC/AHA 2026 血脂指引重點',l:'lipid'}
+];
+const MAP=[
+{side:'l',title:'分期主軸',step:5,items:[['Stage 0','無危險因子，且需明確排除'],['Stage 1','脂肪過多或功能異常'],['Stage 2','代謝危險因子、低至中風險 CKD、MASLD F0–F1'],['Stage 3','亞臨床 CVD、PREVENT ≥20%、高／極高風險 CKD、F2–F3'],['Stage 4a','臨床 CVD（含 AF）'],['Stage 4b','腎衰竭或肝硬化','AHA 僅腎衰竭']]},
+{side:'l',title:'代謝風險',step:1,items:[['肥胖','BMI ≥23；腰圍男 ≥90、女 ≥80','亞洲門檻'],['血壓','≥130/80 mmHg'],['血糖','前期 A1c 5.7–6.4%；糖尿病 ≥6.5%'],['血脂','Sampson/NIH 優先；TG ≥400 不用 Friedewald','Non-HDL = TC − HDL']]},
+{side:'l',title:'常見陷阱',step:5,items:[['FIB-4、VCTE 陽性','不等於 F2／F3'],['單次 eGFR、UACR 異常','不等於 CKD'],['資料不足','不等於 Stage 0'],['PREVENT 與 KFRE','終點不同，不可合併','無 CKLM 總風險%'],['美國校準','PREVENT 不等於台灣個人實際風險']]},
+{side:'r',title:'腎臟',step:2,items:[['G × A','eGFR + UACR，需持續 ≥3 個月'],['KFRE','限已確認的 G3–G5'],['門檻','5 年 3–5% 轉診；2 年 >10% 多專業；2 年 >40% 準備 KRT'],['RASi','A2–A3；不併用 ACEi + ARB'],['SGLT2i','eGFR ≥20 開始；已用者可續用'],['Finerenone','T2D、eGFR >25、K⁺ 正常、持續白蛋白尿']]},
+{side:'r',title:'肝臟',step:3,items:[['第一步 FIB-4','<1.3 低；1.3–2.67 中間；>2.67 高','>65 歲下限 2.0'],['第二步 VCTE','<8 低；8–<12 中間；≥12 kPa 高'],['FAST','0.35／0.67 判斷 at-risk MASH'],['F2–F3 確認後','Resmetirom 或 semaglutide 2.4 mg','Stage 3'],['F4','不用 MASH 標靶藥；statin 可用；每半年肝癌監測']]},
+{side:'r',title:'心血管',step:4,items:[['PREVENT','30–79 歲、無已知 CVD'],['不適用','臨床 CVD、CAC ≥300、LVEF <40%、ESKD'],['亞臨床','CAC、pre-HF → Stage 3'],['PREVENT-ASCVD','3–<5% 可考慮；5–<10% 應考慮降 LDL'],['PREVENT-CVD ≥7.5%','有適應症時啟用 SGLT2i／GLP-1 類'],['臨床 CVD','二級預防、HF GDMT → Stage 4']]}
+];
+/*TEACH-END*/
+(function(){
+ const LETTER='ABCD',ANS={};let quizFilter='all',mapOpen=true;
+ const cite=keys=>keys.map(k=>`<a href="${SRC[k][1]}" target="_blank" rel="noopener">${SRC[k][0]} ↗</a>`).join('');
+ const RES=[['stage','暫定分期'],['kdigo','KDIGO'],['fib','FIB-4'],['lsm','VCTE 分層'],['fast','FAST'],['cvd','10 年 PREVENT-CVD'],['asc','10 年 PREVENT-ASCVD'],['k2','KFRE 2 年'],['k5','KFRE 5 年'],['ldl','LDL-C 估算']];
+ const list=a=>'<ul class="line-list">'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+ function renderCases(){
+  el('caseList').innerHTML=CASES.map((c,i)=>`<article class="card t-case" id="${c.id}"><div class="t-case-head"><h3>病例 ${i+1}｜${c.title}</h3><span class="note-pill">${c.tag}</span></div><p class="t-stem">${c.stem}</p><div class="t-chips">${c.chips.map(x=>`<span>${x}</span>`).join('')}</div><p class="t-ask">${c.ask}</p><details><summary>顯示判讀與處置</summary>${c.visits.map(v=>`${c.visits.length>1?`<div class="t-visit-label">${v.label}</div>`:'<div style="height:9px"></div>'}<div class="t-results">${RES.filter(([k])=>v.expect[k]!==undefined).map(([k,n])=>`<div><b>${n}</b><span>${v.expect[k]}</span></div>`).join('')}</div>`).join('')}<h4>為什麼</h4>${list(c.why)}<h4>下一步</h4>${list(c.next)}<div class="callout warn"><strong>常見錯誤：</strong>${c.trap}</div><div class="t-cite">依據：${cite(c.cite)}</div></details><div class="t-load">${c.visits.map((v,j)=>`<button class="btn small" data-case="${i}" data-visit="${j}">${v.load} →</button>`).join('')}<small>會覆蓋目前輸入的資料</small></div></article>`).join('');
+ }
+ function renderQuiz(){
+  el('quizList').innerHTML=QUIZ.map((q,i)=>{const a=ANS[i],done=a!==undefined;return `<article class="card q-card" data-lv="${q.lv}"${quizFilter!=='all'&&quizFilter!==q.lv?' hidden':''}><span class="note-pill${q.lv==='adv'?' amber':''}">${q.lv==='adv'?'高階':'基礎'}</span> <strong style="font-size:13px;color:var(--muted)">第 ${i+1} 題</strong><p class="q-stem">${q.q}</p><div class="q-opts">${q.o.map((o,j)=>`<button class="q-opt${done&&j===q.a?' right':''}${done&&j===a&&j!==q.a?' wrong':''}" data-q="${i}" data-o="${j}"${done?' disabled':''}><b>${LETTER[j]}</b><span>${o}</span></button>`).join('')}</div>${done?`<div class="q-exp"><span class="verdict ${a===q.a?'good':'bad'}">${a===q.a?'答對。':'答錯，正確答案是 '+LETTER[q.a]+'。'}</span> ${q.e}<a href="${SRC[q.l][1]}" target="_blank" rel="noopener">依據：${q.s} ↗</a></div>`:''}</article>`}).join('');
+  const n=Object.keys(ANS).length,r=Object.entries(ANS).filter(([i,a])=>QUIZ[i].a===a).length;
+  el('quizScore').textContent=n===QUIZ.length?`完成：答對 ${r}／${QUIZ.length} 題`:`已答 ${n}／${QUIZ.length} 題，答對 ${r} 題`;
+ }
+ function renderMap(){
+  const side=s=>`<div class="mm-side ${s}">${MAP.filter(n=>n.side===s).map(n=>`<div class="mm-node" data-open="true"><button class="mm-btn" aria-expanded="true">${n.title}<i>▾</i></button><ul>${n.items.map(([a,b,c])=>`<li><b>${a}</b>：${b}${c?`<small>（${c}）</small>`:''}</li>`).join('')}</ul><button class="mm-go" data-go="${n.step}">前往工具 →</button></div>`).join('')}</div>`;
+  el('mindMap').innerHTML=side('l')+'<div class="mm-root">CKLM<br>整合評估<small>心・腎・肝・代謝</small></div>'+side('r');
+ }
+ function setNode(n,open){n.dataset.open=open;n.querySelector('.mm-btn').setAttribute('aria-expanded',open);n.querySelector('i').textContent=open?'▾':'▸'}
+ function openTeach(v,push){document.body.dataset.view=v;if(push!==false&&location.hash!=='#'+v)history.replaceState(null,'','#'+v);window.scrollTo({top:0,behavior:'instant'})}
+ document.querySelectorAll('.nav-teach').forEach(b=>b.addEventListener('click',()=>openTeach(b.dataset.view)));
+ el('caseList').addEventListener('click',ev=>{const b=ev.target.closest('[data-case]');if(!b)return;const c=CASES[+b.dataset.case],v=c.visits[+b.dataset.visit];loadValues(v.values,`病例 ${+b.dataset.case+1}${c.visits.length>1?'（'+v.label+'）':''}`);nav(5)});
+ el('quizList').addEventListener('click',ev=>{const b=ev.target.closest('[data-q]');if(!b)return;ANS[+b.dataset.q]=+b.dataset.o;const y=window.scrollY;renderQuiz();window.scrollTo({top:y,behavior:'instant'})});
+ el('quizFilter').addEventListener('click',ev=>{const b=ev.target.closest('[data-f]');if(!b)return;quizFilter=b.dataset.f;document.querySelectorAll('#quizFilter [data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b));renderQuiz()});
+ el('quizReset').addEventListener('click',()=>{for(const k of Object.keys(ANS))delete ANS[k];renderQuiz();window.scrollTo({top:0,behavior:'instant'})});
+ el('mindMap').addEventListener('click',ev=>{const go=ev.target.closest('[data-go]');if(go){nav(+go.dataset.go);return}const b=ev.target.closest('.mm-btn');if(!b)return;const n=b.parentElement;setNode(n,n.dataset.open!=='true')});
+ el('mapToggle').addEventListener('click',()=>{mapOpen=!mapOpen;document.querySelectorAll('.mm-node').forEach(n=>setNode(n,mapOpen));el('mapToggle').textContent=mapOpen?'全部收合':'全部展開'});
+ el('demoToCases').addEventListener('click',()=>el('demoDialog').close());
+ document.querySelector('.content').addEventListener('input',()=>{el('demoBanner').hidden=true});
+ document.querySelector('.content').addEventListener('change',()=>{el('demoBanner').hidden=true});
+ function route(){const v=location.hash.slice(1);if(['cases','quiz','map'].includes(v))openTeach(v,false);else if(document.body.dataset.view)document.body.removeAttribute('data-view')}
+ window.addEventListener('hashchange',route);
+ renderCases();renderQuiz();renderMap();route();
+})();
 </script>
 </body>
 </html>

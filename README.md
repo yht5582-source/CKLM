@@ -9,4 +9,8 @@
 - KDIGO G×A 風險矩陣、KFRE 4 變數（非北美校準）
 - FIB-4、VCTE 分層、FAST score；血脂交叉驗證（Sampson/NIH、Friedewald）
 
+- 教學分頁：示範病例 6 例（`#cases`）、考題 20 題（基礎、高階各 10，`#quiz`）、心智圖（`#map`）
+
+測試：`node tests.cjs`，病例與考題的數值都由頁面引擎核對。
+
 單一靜態 `index.html`，所有運算在瀏覽器本機完成，不上傳資料。僅供教育與決策輔助，不取代醫師判斷。
